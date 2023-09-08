@@ -1,16 +1,57 @@
 \mcmSection{模型的建立与求解}
 
-\mcmSubsection{问题1：}
+\mcmSubsection{问题1：通过三角函数求出多波束探测的覆盖宽度}
 
+根据题意，可以抽象出如下的几何问题。
+
+已知$\vartriangle PAB$是以$PA$、$PB$为腰的等腰三角形，其中，点$C$是$BP$上任意一点, PM是AB的垂线，且$\angle APB = \theta$, $\angle CAB = \alpha$, $PM = D$（如图\ref{fig:理想情况下的覆盖区域几何图}），求出$AC$在$AB$上的投影。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{res/img/理想情况下的覆盖区域几何图.png}
+    \caption{理想情况下的覆盖区域几何图}
+    \label{fig:理想情况下的覆盖区域几何图}
+\end{figure}
+
+由题意可设$AM=x_1$，$MC=x_2$，$\angle PAM = \frac{\pi - \theta}{2} - \alpha = \varphi $.
+
+对于$\vartriangle PAM$，根据正弦定理，存在方程：
+
+\begin{equation}
+    \frac{\sin\angle APM}{AM} = \frac{\sin\angle PAM}{PM}
+\end{equation}
+
+对于$\vartriangle PCM$，根据正弦定理，存在方程：
+
+\begin{equation}
+    \frac{\sin\angle CPM}{CM} = \frac{\sin\angle PCM}{PM}
+\end{equation}
+
+综上所述，将对应的值带入方程，可得下列方程组：
 
 \begin{equation}
     \begin{cases}
-        \frac{\partial\rho}{\partial t} + \nabla \cdot (\rho u) = 0 &\text{连续性方程}  \\
-        \rho \frac{Du}{Dt} = \rho F + \nabla \cdot P &\text{运动方程}    \\
-        \rho \frac{De}{Dt} = P:S + \nabla \cdot (k\nabla T) + \rho \dot{q}  &\text{能量方程}
+        \varphi = \frac{\pi - \theta}{2} - \alpha \\
+        \frac{\sin \frac{\theta}{2}}{x_1} = \frac{\sin\varphi}{D} \\
+        \frac{\sin \frac{\theta}{2}}{x_2} = \frac{\sin(\pi-\theta-\varphi)}{D}
     \end{cases}
 \end{equation}
 
+解得
+
+\begin{equation}
+    AC = x_1 + x_2 
+       = \frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\pi - \theta - \varphi)}D
+\end{equation}
+
+故
+
+\begin{equation}
+    Proj AC = \left(\frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\pi - \theta - \varphi)}D\right) \cdot \cos \alpha
+    \label{equ:理想情况下的区域覆盖公式}
+\end{equation}
+
+根据公式\ref{equ:理想情况下的区域覆盖公式}，根据实际参数，编程（后面指出具体是哪个代码）后可得出下列结果：
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
