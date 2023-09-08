@@ -68,6 +68,57 @@
 \end{table}
 
 
-\mcmSubsection{问题二：活络}
+\mcmSubsection{问题二：一般情况下，覆盖率求解}
+
+根据题意，可以抽象出如下的几何问题：
+
+有两个直三棱柱如图所示摆放，三棱柱$BEC-AFD$的侧边与三棱柱$DHC-FGE$的侧边相重合（这里用词是否准确？），其中，$AF$垂直于$FE$，$FG$垂直于$GE$，$\angle AFG=\beta$，$\angle CBE=\alpha$。设平面$ABCD$与平面$HCEG$的交线为$l_s$，求$l_s$与$ABEF$平面的夹角。
+
+分别设平面ABCD与平面HCEG的法向量为$\tau_\text{坡}$和$\tau_\text{测}$，$l_s$的方向向量为$v_s$.
+
+根据平面法向量的性质，存在方程组：
+
+\begin{equation}
+    \begin{cases}
+        \tau_\text{坡} \cdot v_s = 0 \\
+        \tau_\text{测} \cdot v_s = 0
+    \end{cases}
+\end{equation}
+
+又因为$\angle AFG=\beta$，$\angle CBE=\alpha$，可得：
+
+\begin{equation}
+    \begin{cases}
+        \tau_\text{坡} = (\sin\alpha, 0, \cos\alpha) \\
+        \tau_\text{测} = (-\sin(\beta-\frac{\pi}{2}), \cos(\beta-\frac{\pi}{2}), 0)
+    \end{cases}
+\end{equation}
+
+固有方程组：
+
+\begin{equation}
+    \begin{cases}
+        x\sin\alpha + z\cos\alpha = 0 \\
+        -x\sin(\beta-\frac{\pi}{2}) + y \cos(\beta-\frac{\pi}{2}) = 0
+    \end{cases}
+\end{equation}
+
+综上所述，可得
+
+\begin{equation}
+    v_s 
+    = (i, j, k)
+    = \left( 
+            \cot \alpha, 
+            \frac{\cot\alpha \sin\left(\beta - \frac{\pi}{2}\right)}{\cos\left(\beta-\frac{\pi}{2}\right)},
+            -1
+            \right)
+\end{equation}
+
+所以，$l_s$与平面$ABEF$的夹角为
+
+\begin{equation}
+    <l_s, ABEF> = \arctan\frac{k}{\sqrt{i^2+j^2}}
+\end{equation}
 
 \mcmSection{模型的评价与改进}
