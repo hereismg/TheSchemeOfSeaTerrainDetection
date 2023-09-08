@@ -72,7 +72,7 @@
 
 根据题意，可以抽象出如下的几何问题：
 
-有两个直三棱柱如图\ref{fig:一般情况下的覆盖区域几何图}所示摆放，三棱柱$BEC-AFD$的侧边与三棱柱$DHC-FGE$的侧边相重合（这里用词是否准确？），其中，$AF$垂直于$FE$，$FG$垂直于$GE$，$\angle AFG=\beta$，$\angle CBE=\alpha$。设平面$ABCD$与平面$HCEG$的交线为$l_s$，求$l_s$与$ABEF$平面的夹角。
+有两个直三棱柱如图\ref{fig:一般情况下的覆盖区域几何图}所示摆放，三棱柱$BEC-AFD$的侧边与三棱柱$DHC-FGE$的侧边相重合（这里用词是否准确？），其中，$AF$垂直于$FE$，$FG$垂直于$GE$，$\angle AFG=\beta$，$\angle CBE=\alpha$。设平面$ABCD$与平面$HCEG$的交线为$l_s$（图中未画出），求$l_s$与平面$ABEF$的夹角。
 
 \begin{figure}[h]
     \centering
@@ -81,7 +81,7 @@
     \label{fig:一般情况下的覆盖区域几何图}
 \end{figure}
 
-分别设平面ABCD与平面HCEG的法向量为$\tau_\text{坡}$和$\tau_\text{测}$，$l_s$的方向向量为$v_s$.
+分别设平面ABCD与平面HCEG的法向量为$\tau_\text{坡}$和$\tau_\text{测}$，$l_s$的方向向量为$v_s = (x_0, y_0, z_0)$.
 
 根据平面法向量的性质，存在方程组：
 
@@ -97,7 +97,7 @@
 \begin{equation}
     \begin{cases}
         \tau_\text{坡} = (\sin\alpha, 0, \cos\alpha) \\
-        \tau_\text{测} = (-\sin(\beta-\frac{\pi}{2}), \cos(\beta-\frac{\pi}{2}), 0)
+        \tau_\text{测} = (\cos\beta, \sin\beta, 0)
     \end{cases}
 \end{equation}
 
@@ -105,27 +105,42 @@
 
 \begin{equation}
     \begin{cases}
-        x\sin\alpha + z\cos\alpha = 0 \\
-        -x\sin(\beta-\frac{\pi}{2}) + y \cos(\beta-\frac{\pi}{2}) = 0
+        x_0\sin\alpha + z_0\cos\alpha = 0 \\
+        x_0\cos\beta + y_0 \sin\beta = 0
     \end{cases}
 \end{equation}
 
-综上所述，可得
+即:
+
+\begin{equation*}
+    \begin{cases}
+        y_0 = -x_0 \cot \beta \\
+        z_0 = -x_0 \tan \alpha
+    \end{cases}
+\end{equation*}
+
+不妨令$x_0 = -1$，则有:
 
 \begin{equation}
     v_s 
-    = (i, j, k)
+    = (x_0, y_0, z_0)
     = \left( 
-            \cot \alpha, 
-            \frac{\cot\alpha \sin\left(\beta - \frac{\pi}{2}\right)}{\cos\left(\beta-\frac{\pi}{2}\right)},
-            -1
-            \right)
+            -1,
+            \cot \beta,
+            \tan \alpha
+      \right)
 \end{equation}
+
+因而:
+
+\begin{equation*}
+    \tan <l_s, ABEF> = \frac {\tan \alpha} {\sqrt{(-1)^2 + \cot ^2 \beta}}
+\end{equation*}
 
 所以，$l_s$与平面$ABEF$的夹角为
 
 \begin{equation}
-    <l_s, ABEF> = \arctan\frac{k}{\sqrt{i^2+j^2}}
+    <l_s, ABEF> = \arctan \left(|\sin \beta| \tan \alpha\right)
 \end{equation}
 
 % Please add the following required packages to your document preamble:
