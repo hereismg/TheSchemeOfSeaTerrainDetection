@@ -80,10 +80,12 @@
 
 在问题一的情景中，当测量船与中心位置有一定偏移时，深度会发生改变，并且变化量$\Delta D$如图\ref{fig:深度变化}所示。
 
+
+
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{res/img/深度变化.png}
-    \caption{深度变化}
+    \caption{深度变化/TODO 添加超链接}
     \label{fig:深度变化}
 \end{figure}
 
@@ -245,7 +247,7 @@
 
 因此，有以下简化模型：
 
-假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = W_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
+假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = w_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
 
 \begin{figure}[h]
     \centering
@@ -300,7 +302,7 @@ $A$点的坐标为:
     \arctan \left(|\sin \beta| \tan \alpha\right)
 \end{equation}
 
-由 [条带宽度计算公式] ，根据船$P$当前的位置，可得条带宽度函数$W$的表达式为:
+由 /TODO 插入"条带宽度计算公式"标号 ，根据船$P$当前的位置，可得条带宽度函数$W$的表达式为:
 
 \begin{equation}
     % w(\beta, x, t) = 
@@ -343,13 +345,13 @@ $A$点的坐标为:
     \begin{cases}
         \min \left \{
                 \frac{x}{\cos \beta}, 
-                \frac{W_{sea}}{\sin \beta}
+                \frac{w_{sea}}{\sin \beta}
             \right \}
         & \beta \in \left(0, \frac{\pi}{2} \right)\\
-        W_{sea} & \beta = \frac{\pi}{2}\\
+        w_{sea} & \beta = \frac{\pi}{2}\\
         \min \left \{
                 \frac{x - l_{sea}}{\cos \beta}, 
-                \frac{W_{sea}}{\sin \beta}
+                \frac{w_{sea}}{\sin \beta}
             \right \}
         & \beta \in \left(\frac{\pi}{2}, \pi \right) 
     \end{cases}
@@ -359,6 +361,21 @@ $A$点的坐标为:
 
 \begin{equation}
     \frac{dS(\hat \beta)}{d\beta} = 0
+\end{equation}
+
+/TODO 猜测：
+
+不难得出，当$\hat \beta = \frac{\pi}{2}$时，有条带面积最大值为：
+
+\begin{equation}
+    S(\hat \beta) = 
+    w_{sea} \cdot (h - x\tan \alpha) \cdot \left[
+        \frac{1}{\cos \left(
+            \frac{\theta}{2} + \alpha
+        \right)} + \frac{1}{\cos \left(
+            \frac{\theta}{2} - \alpha
+        \right)}
+    \right]\cdot \sin \frac{\theta}{2} \cdot \cos \alpha
 \end{equation}
 
 \mcmSubsubsection{计算流程}
