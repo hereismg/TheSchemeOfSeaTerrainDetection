@@ -22,11 +22,44 @@
     \label{fig:问题一重述图}
 \end{figure}
 
-\textbf{问题2：}已知一个三维空间，如下图。其中，。需根据题意，抽象出二维平面，即将经过船且垂直于测线的平面截面置于二维平面上。再利用与问题1类似的平面几何解法，进而对于不同的测线距中心点处的距离及相对角度$\beta$，分别求解出\textbf{覆盖宽度}$W$。
+\textbf{问题2：}如下图为一个三维空间。其中，相邻两条测线的间距$d$、换能器开角$\theta$、坡度$\alpha$和其中一个部分的海水深度$D_0$均已知。需根据题意，抽象出二维平面，即将经过船且垂直于测线的平面截面置于二维平面上。再利用与问题1类似的平面几何解法，进而对于不同的测线距中心点处的距离及测线的方向角$\beta$，分别求解出\textbf{覆盖宽度}$W$。
 
-\textbf{问题3：}
+% \begin{figure}[h]   
+%     \centering
+%     \includegraphics[scale=0.3]{res/img/问题二重述图.png}
+%     \caption{\href{https://www.geogebra.org/m/pwzyn5ba}{\textcolor{blue}{问题二立体图}}}
+%     \label{fig:问题二立体图}
+% \end{figure}
 
-\textbf{问题4：}
+% \begin{figure}[h]   
+%     \centering
+%     \includegraphics[scale=0.3]{res/img/问题二重述图_截面图.png}
+%     \caption{\href{https://www.geogebra.org/m/g2rwmqvx}{\textcolor{blue}{问题二截面正视图}}}
+%     \label{fig:问题二截面正视图}
+% \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[scale=0.18]{res/img/问题二重述图.png}
+      \caption{\href{https://www.geogebra.org/m/pwzyn5ba}{\textcolor{blue}{问题二立体图}}}
+      \label{fig:问题二立体图}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[scale=0.18]{res/img/问题二重述图_截面图.png}
+      \caption{\href{https://www.geogebra.org/m/g2rwmqvx}{\textcolor{blue}{问题二截面正视图}}}
+      \label{fig:问题二截面正视图}
+    \end{subfigure}
+    \caption{问题二重述图}
+    \label{fig:问题二重述图}
+\end{figure}
+
+\textbf{问题3：}该问题依旧是在三维空间下的，依旧是换能器开角$\theta$、坡度$\alpha$和其中一个部分的海水深度$D_0$均已知。但是和问题二不同的是，这次需要决定：在测线的覆盖范围为整个规定海域，且重叠率$\eta \in [10\%, 20\%]$的前提下，求出测量长度最短的方案的\textbf{测线的方向角}$\beta$与相邻两条\textbf{测线的间距}$d$（允许任意两对两条相邻的测线不等距）。
+
+\textbf{问题4：}该问题在问题3的基础上，将\textbf{坡面}更换成\textbf{不规则地形}。由于很难将整个海域一点不落地覆盖，该题要求扫描条带\textbf{尽可能}地覆盖整个海域、重叠率$\eta$\textbf{尽可能}控制在$20\%$以下和测量路线\textbf{尽可能}短。给定离散的二维平面上的点对应的海水深度数据，要求给定一个方案的\textbf{测线的方向角}$\beta$与相邻两条\textbf{测线的间距}$d$以满足要求（允许任意两对两条相邻的测线不等距）。
 
 % ==================================================
 % @brief    问题分析
