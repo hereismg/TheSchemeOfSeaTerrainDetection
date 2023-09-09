@@ -245,7 +245,7 @@
 
 因此，有以下简化模型：
 
-假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = w_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
+假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = W_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
 
 \begin{figure}[h]
     \centering
@@ -300,7 +300,7 @@ $A$点的坐标为:
     \arctan \left(|\sin \beta| \tan \alpha\right)
 \end{equation}
 
-由 [条带宽度计算公式] ，根据船$P$当前的位置，可得条带宽度函数$w$的表达式为:
+由 [条带宽度计算公式] ，根据船$P$当前的位置，可得条带宽度函数$W$的表达式为:
 
 \begin{equation}
     % w(\beta, x, t) = 
@@ -310,7 +310,7 @@ $A$点的坐标为:
     %     \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
     % \right)\cdot
     % \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
-    w(\beta, t) = 
+    W(\beta, t) = 
     D(\beta, t)\cdot 
     \left(
         \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
@@ -328,7 +328,7 @@ $A$点的坐标为:
     % }
     S(\beta) = 
     \int _{0} ^{R(\beta)} {
-        w(\beta, t)dt
+        W(\beta, t)dt
     }
 \end{equation}
 
@@ -343,13 +343,13 @@ $A$点的坐标为:
     \begin{cases}
         \min \left \{
                 \frac{x}{\cos \beta}, 
-                \frac{w_{sea}}{\sin \beta}
+                \frac{W_{sea}}{\sin \beta}
             \right \}
         & \beta \in \left(0, \frac{\pi}{2} \right)\\
-        w_{sea} & \beta = \frac{\pi}{2}\\
+        W_{sea} & \beta = \frac{\pi}{2}\\
         \min \left \{
                 \frac{x - l_{sea}}{\cos \beta}, 
-                \frac{w_{sea}}{\sin \beta}
+                \frac{W_{sea}}{\sin \beta}
             \right \}
         & \beta \in \left(\frac{\pi}{2}, \pi \right) 
     \end{cases}
