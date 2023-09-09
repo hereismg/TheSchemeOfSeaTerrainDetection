@@ -90,16 +90,15 @@
     \Delta D = d\tan\gamma
 \end{equation}
 
-故中心距离
+故中心距离\newline\newline\newline\newline
 
-\textbf{关键结论2：海底深度函数}
+\begin{mcmTheorem}{海底深度函数}
+    以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与测坡角$\gamma$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
 
-以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与测坡角$\gamma$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
-
-\begin{equation}
-    D(d) = D(0) + d\tan\gamma
-\end{equation}
-
+    \begin{equation}
+        D(d) = D(0) + d\tan\gamma
+    \end{equation}
+\end{mcmTheorem}
 
 重叠率定义为：
 
@@ -192,15 +191,24 @@
 因而:
 
 \begin{equation*}
-    \tan <l_s, ABEF> = \frac {\tan \alpha} {\sqrt{(-1)^2 + \cot ^2 \beta}}
+    \tan <l_s, ABEF> 
+    = \frac {\tan \alpha} {\sqrt{(-1)^2 + \cot ^2 \beta}}
+    = \gamma
 \end{equation*}
 
 所以，$l_s$与平面$ABEF$的夹角为
 
 \begin{equation}
-    <l_s, ABEF> = \arctan \left(|\sin \beta| \tan \alpha\right)
-    \label{equ:测坡角公式}
+    <l_s, ABEF> = \arctan \left(|\sin \beta| \cdot  \tan \alpha\right)
 \end{equation}
+
+\begin{mcmTheorem}{测坡角公式}
+    对于一条测坡线$l_s$，$l_s$与水平面的夹角就是测坡角$\gamma$，$\gamma$与测线方向$\beta$、海底坡度$\alpha$有关，满足如下关系
+
+    \begin{equation}
+        \gamma = \arctan(|\sin\beta| \cdot \tan\alpha)
+    \end{equation}
+\end{mcmTheorem}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
