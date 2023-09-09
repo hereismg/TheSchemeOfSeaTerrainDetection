@@ -94,28 +94,36 @@
 根据几何关系，易得：
 
 \begin{equation}
-    \Delta D = d\tan\gamma
+    \Delta D = d\tan\alpha
 \end{equation}
 
 故中心距离\newline\newline\newline\newline
 
 \begin{mcmTheorem}{海底深度函数}
-    以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与测坡角$\gamma$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
+    以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与坡面坡度$\alpha$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
 
     \begin{equation}
-        D(d) = D(0) + d\tan\gamma
+        D(d) = D(0) + d\tan\alpha
     \end{equation}
 \end{mcmTheorem}
 
-重叠率定义为：
+借原题中测线相互平行且海底地形平坦时的重叠率定义：
 
 \begin{equation}
     \eta = 1 - \frac{d}{W}
 \end{equation}
 
-其中$d$为距离中心点处的距离，$W$为覆盖宽度。
+（其中$d$为相邻两条测线的间距，$W$为条带的覆盖宽度）
 
-当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，中心距离$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
+本文重新定义在均匀坡度下，当测线方向与海底坡面的法向在水平面上投影垂直时，重叠率为：
+
+\begin{equation}
+    \eta = 1-\frac{2d}{S_W}
+\end{equation}
+
+（其中$d$为相邻两条测线的间距，$S_W$为相邻两条条带的覆盖宽度之和）
+
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -132,7 +140,7 @@
 \end{table}
 
 
-\mcmSubsection{问题二：一般情况下，覆盖率求解}
+\mcmSubsection{问题二：一般情况下，重叠率求解}
 
 根据题意，可以抽象出如下的几何问题：
 
@@ -243,9 +251,9 @@
 
 \mcmSubsubsection{方案设计与证明}
 
-考虑一般情况：
+\paragraph{确定测线的方向角$\beta$}
 
-因此，有以下简化模型：
+考虑一般情况，有以下简化模型：
 
 假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = w_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
 
@@ -302,7 +310,7 @@ $A$点的坐标为:
     \arctan \left(|\sin \beta| \tan \alpha\right)
 \end{equation}
 
-由 /TODO 插入"条带宽度计算公式"标号 ，根据船$P$当前的位置，可得条带宽度函数$W$的表达式为:
+由定理1，根据船$P$当前的位置，可得条带宽度函数$W$的表达式为:
 
 \begin{equation}
     % w(\beta, x, t) = 
@@ -378,13 +386,130 @@ $A$点的坐标为:
     \right]\cdot \sin \frac{\theta}{2} \cdot \cos \alpha
 \end{equation}
 
+因此，当测线的方向角$\beta = \frac{\pi}{2}$时相对优秀。
+
+\paragraph{确定相邻测线间距$d$}
+
+要使测量长度最短，在确定测线方向角的情况下，利用贪心的思想，尽可能控制重叠率$\eta = 10\%$。这样可以在单测线的测量长度不变的情况下，使测线条数减小，进而减小测量长度。
+
+/TODO 这里是不是可以推导公式（第$i$条测线与第$i+1$条测线之间的距离$d_i$）?
+
+设第$i$条测线与第$i + 1$条测线之间的距离为$d_i$。已知海域中心的高度，可以用公式推导出第一条测线距离坡面的距离$D_1$。不妨先假设已知的是$D_1$。对于第$i$条测线，深度为$D_i$、覆盖宽度为$W_i$。根据重叠率公式、定理1和定理2不难得出以下方程组：
+
+\begin{equation}
+    \begin{cases}
+        W_i & = D_i\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma\\
+        W_{i + 1} & = D_{i + 1}\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma\\
+        \eta & = 1 - \frac{2d_i}{W_i + W_{i + 1}}\\
+        d_i & = \frac{D_i - D_{i + 1}}{\tan \gamma}
+    \end{cases}
+\end{equation}
+
+令$k, m$的值分别为：
+
+\begin{equation}
+    \begin{cases}
+        k = 
+        \sin\frac{\theta}{2}\left(
+            \frac{1}{\cos(\frac{\theta}{2}+\gamma)} + 
+            \frac{1}{\cos(\frac{\theta}{2}-\gamma)}
+        \right) \cdot \cos \gamma\\
+        m = D_i
+    \end{cases}
+\end{equation}
+
+则可解得：
+
+\begin{equation}
+    \begin{cases}
+        W_i = km\\
+        W_{i + 1} = \left[\frac{4k}{k(1 - \eta) \tan \gamma + 2} - 1\right]m\\
+        D_{i + 1} = \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right]m\\
+        d_i = \frac{2m}{\tan \gamma} - \frac{4m}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
+    \end{cases}
+\end{equation}
+
+接下来，使用解析几何的方式计算得$D_1$用定理2中$D(0)$表示的式子为：
+
+\begin{equation}
+    D_1 = \left[ D(0) + l \tan \alpha \right] \cdot \left( 1 - \tan \alpha \tan \frac{\theta}{2} \right)
+\end{equation}
+
+至此，结合上述公式，可使用递推得到所有测线之间的间距，即有递推公式：
+
+\begin{align}
+    D_{i} = & \begin{cases}
+        D_1 & \text{ if } i = 1 \\
+        D_{i - 1} \cdot \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right] & \text{ otherwise }
+    \end{cases}\\
+    d_i = & \frac{2D_i}{\tan \gamma} - \frac{4D_i}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
+\end{align}
+
+\paragraph{方案总结}
+
+在测线的方向角固定为$\beta = \frac{\pi}{2}$时，动态调整第$i$条与第$i + 1$条测线的间距$d_i$为以上表达式，以在保证整个海域均被覆盖的同时，控制重叠率为$\eta = 10\%$。
+
 \mcmSubsubsection{计算流程}
+
+\textbf{第一步: 求出第一条测线的最优方案}
+
+若要使得整体测线方案最优，根据动态规划的最优子结构思想，需要先计算出第一条测线的最优情况，再根据第一条测线推导出其他测线方案，就可保证后续规划的每一条测线都为最优情况，最终做到整体测线方案为最优方案。
+
+而第一条测线的最优情况，只能在边界条件下达成。分别有两种方案：
+
+方案一 在东边界设立第一条测线.即按图4所示，AM在AB上的投影等于测线在以东向西为正方向时东西方向上的坐标。
+
+方案二 在西边界设立第一条测线。即按图4所示，MC在AB上的投影等于测线在以西向东为正方向时东西方向上的坐标。
+
+通过观察易知，第一条测线因无上一条测线，无需满足重叠率要求，故其覆盖宽度越大，整体探测效率越高。因此根据方案一确立第一条测线才为最优方案。
+
+设第一条测线在以东向西为正方向时东西方向上的坐标为$x_1$（米），设海域中心在在以东向西为正方向时东西方向上的坐标为$W_c$（米），设海域中心点处的海水深度为$D_c$（米），则按图4模型可列方程：
+
+\begin{equation}
+    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \phi}{\sin \frac{\theta}{2} \cos \alpha} 
+\end{equation}
+
+从而解得$x_i$，进一步算得第一条测线的水深$D_1$（米）与覆盖宽度$CW_1$（米），其中$\gamma = \alpha$：
+
+\begin{equation}
+    D_1 =  (W_c - x_1) \tan{\alpha} + D_c
+\end{equation}
+
+\begin{equation}
+    CW_1 = D_1\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
+\end{equation}
+
+\textbf{第二步: 进一步推导其他测线方案}
+
+得到第一条测线的位置与覆盖宽度后，便可推出下一条测线的最优情况。
+
+问题三要求所规划的整体测量长度最短，且相邻条带之间的重叠率满足 10\%~20\% 的要求。故意味着下一条最优测线与上一条最优测线的重叠率为10\%。设第$i$条测线在以东向西为正方向时东西方向上的坐标为$x_i$（米），水深为$D_i$（米），覆盖宽度为$CW_i$（米），故根据式(8)可列方程如下：
+
+\begin{equation}
+    1-\frac{2(x_i-x_{i-1})}{CW_{i-1}+CW_i} = 0.1
+\end{equation}
+
+\begin{equation}
+    CW_i = D_i\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
+\end{equation}
+
+\begin{equation}
+    D_i =  (W_c - x) \tan{\alpha} + D_c
+\end{equation}
+
+联立式(27)、式(28)、式(29)，最终可解得$x_i$的值，即可确定下一条测线的最优方案。
+
+循环执行第二步，并设立边界条件$ x <= 2W_c $，即可求出一组测量长度最短、可完全覆盖整个待测海域的测线。
+
+\mcmSubsubsection{计算结果}
+
+
 
 \mcmSubsection{问题四：在已有数据情况下的测线方案设计}
 
 \mcmSubsubsection{第一步: 求出最优的测线方向角}
 
-根据问题三的证明，为了尽可能保证每条测线的覆盖率最小，同时航行路程最短，应该尽可能让航行条带等宽。因此，在探测平坦的海底坡面时，只要尽力保证测线上每个点的深度不变即可。而为了为衡量这该不变程度，接下来定义海底坡面的平坦率$\varepsilon$。
+根据问题三的证明，为了尽可能保证每条测线的重叠率最小，同时航行路程最短，应该尽可能让航行条带等宽。因此，在探测平坦的海底坡面时，只要尽力保证测线上每个点的深度不变即可。而为了为衡量这该不变程度，接下来定义海底坡面的平坦率$\varepsilon$。
 
 首先定义某条测线的平坦率。在某条测线的海域下，从起点A到终点B之间的海底深度$D$的方差称为线段AB在该海域上的的平坦率。而对于问题四中给出的离散数据而言，应找到线段AB附近位置的海底深度数据，依次近似求出该线段的平坦率。定义该数据列表为$D_{i}$，平坦率$\varepsilon$满足：
 
@@ -400,19 +525,25 @@ $A$点的坐标为:
 
 综上，得到一个测线方案
 
-接下来，以(0,0)为初始位置，令$\beta = \frac{k}{72}\pi$，其中$k = 0, 1, 2, \cdots, 36$，求出在该方向下的平坦率，如下表所示：
+接下来，以(0,0)为初始位置，令$\beta = \frac{k}{72}\pi$，其中$k = 0, 1, \cdots, 36$，求出在该方向下的平坦率，如下表所示：
 
 
 
 \mcmSubsubsection{第二步：求出最优测线方案}
 
+在上述所有的方向中，平坦率最大值所对应的方向$\hat \beta$，认为是测线方向最合适的。随后，以该方向为基础，每间隔$d$增加一条测线，延伸到海域外围为止。随后，计算所有测线的平坦率。若有$n$条测线，对于第$i$条测线，其平坦率设为$\varepsilon_i$，并且所有测线平坦率对应的平均值，视为整个海域的平坦率，则有:
+
+\begin{equation}
+    \overline{\varepsilon} = \frac{1}{n} \sum^{n}_{i=1}\varepsilon_i 
+\end{equation}
+
 \mcmSubsubsection{第三步：求出最优测线方案下的各种指标}
 
 首先，根据三维线性规划，求出某条测线能够覆盖的点的集合。
 
-其次，根据安德鲁算法（凸包算法）求出该点集的轮廓，进而求出面积，并且与相邻测线的点集取交集，求出该交集的面积。
+其次，将点集映射到水平平面后，根据安德鲁算法（凸包算法）求出该点集的轮廓，进而求出面积。同时与相邻测线的点集再取交集，以求出该交集的凸包的面积，为之后求重叠率做准备。
 
-最后，根据前面的计算过程，得出覆盖率。
+最后，根据前面的计算过程，得出重叠率。
 
 % ==================================================
 % @brief    模型的评价与改进
