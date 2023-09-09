@@ -92,28 +92,36 @@
 根据几何关系，易得：
 
 \begin{equation}
-    \Delta D = d\tan\gamma
+    \Delta D = d\tan\alpha
 \end{equation}
 
 故中心距离\newline\newline\newline\newline
 
 \begin{mcmTheorem}{海底深度函数}
-    以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与测坡角$\gamma$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
+    以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与坡面坡度$\alpha$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
 
     \begin{equation}
-        D(d) = D(0) + d\tan\gamma
+        D(d) = D(0) + d\tan\alpha
     \end{equation}
 \end{mcmTheorem}
 
-重叠率定义为：
+借原题中测线相互平行且海底地形平坦时的重叠率定义：
 
 \begin{equation}
     \eta = 1 - \frac{d}{W}
 \end{equation}
 
-其中$d$为距离中心点处的距离，$W$为覆盖宽度。
+（其中$d$为相邻两条测线的间距，$W$为条带的覆盖宽度）
 
-当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，中心距离$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
+本文重新定义在均匀坡度下，当测线方向与海底坡面的法向在水平面上投影垂直时，重叠率为：
+
+\begin{equation}
+    \eta = 1-\frac{2d}{S_W}
+\end{equation}
+
+（其中$d$为相邻两条测线的间距，$S_W$为相邻两条条带的覆盖宽度之和）
+
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -362,6 +370,60 @@ $A$点的坐标为:
 \end{equation}
 
 \mcmSubsubsection{计算流程}
+
+\textbf{第一步: 求出第一条测线的最优方案}
+
+若要使得整体测线方案最优，根据动态规划的最优子结构思想，需要先计算出第一条测线的最优情况，再根据第一条测线推导出其他测线方案，就可保证后续规划的每一条测线都为最优情况，最终做到整体测线方案为最优方案。
+
+而第一条测线的最优情况，只能在边界条件下达成。分别有两种方案：
+
+方案一 在东边界设立第一条测线.即按图4所示，AM在AB上的投影等于测线在以东向西为正方向时东西方向上的坐标。
+
+方案二 在西边界设立第一条测线。即按图4所示，MC在AB上的投影等于测线在以西向东为正方向时东西方向上的坐标。
+
+通过观察易知，第一条测线因无上一条测线，无需满足重叠率要求，故其覆盖宽度越大，整体探测效率越高。因此根据方案一确立第一条测线才为最优方案。
+
+设第一条测线在以东向西为正方向时东西方向上的坐标为$x_1$（米），设海域中心在在以东向西为正方向时东西方向上的坐标为$W_c$（米），设海域中心点处的海水深度为$D_c$（米），则按图4模型可列方程：
+
+\begin{equation}
+    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \phi}{\sin \frac{\theta}{2} \cos \alpha} 
+\end{equation}
+
+从而解得$x_i$，进一步算得第一条测线的水深$D_1$（米）与覆盖宽度$CW_1$（米），其中$\gamma = \alpha$：
+
+\begin{equation}
+    D_1 =  (W_c - x_1) \tan{\alpha} + D_c
+\end{equation}
+
+\begin{equation}
+    CW_1 = D_1\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
+\end{equation}
+
+\textbf{第二步: 进一步推导其他测线方案}
+
+得到第一条测线的位置与覆盖宽度后，便可推出下一条测线的最优情况。
+
+问题三要求所规划的整体测量长度最短，且相邻条带之间的重叠率满足 10\%~20\% 的要求。故意味着下一条最优测线与上一条最优测线的重叠率为10\%。设第$i$条测线在以东向西为正方向时东西方向上的坐标为$x_i$（米），水深为$D_i$（米），覆盖宽度为$CW_i$（米），故根据式(8)可列方程如下：
+
+\begin{equation}
+    1-\frac{2(x_i-x_{i-1})}{CW_{i-1}+CW_i} = 0.1
+\end{equation}
+
+\begin{equation}
+    CW_i = D_i\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
+\end{equation}
+
+\begin{equation}
+    D_i =  (W_c - x) \tan{\alpha} + D_c
+\end{equation}
+
+联立式(27)、式(28)、式(29)，最终可解得$x_i$的值，即可确定下一条测线的最优方案。
+
+循环执行第二步，并设立边界条件$ x <= 2W_c $，即可求出一组测量长度最短、可完全覆盖整个待测海域的测线。
+
+\mcmSubsubsection{计算结果}
+
+
 
 \mcmSubsection{问题四：在已有数据情况下的测线方案设计}
 
