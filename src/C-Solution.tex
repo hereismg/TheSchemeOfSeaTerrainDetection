@@ -389,7 +389,7 @@ $A$点的坐标为:
 首先定义某条测线的平坦率。在某条测线的海域下，从起点A到终点B之间的海底深度$D$的方差称为线段AB在该海域上的的平坦率。而对于问题四中给出的离散数据而言，应找到线段AB附近位置的海底深度数据，依次近似求出该线段的平坦率。定义该数据列表为$D_{i}$，平坦率$\varepsilon$满足：
 
 \begin{equation}
-    \varepsilon = \frac{1}{n} \sum^{n}_{i=1}(D_i - \overline{D} ) 
+    \varepsilon = \frac{1}{n} \sum^{n}_{i=1}(D_i - \overline{D} )^2
 \end{equation}
 
 其中，$\overline{D}$为深度的平均值。
