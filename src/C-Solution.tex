@@ -271,14 +271,18 @@ $A$点的坐标为:
 当前船（点$P$）的位置代入坡面解析式后，可以得出此时距离海水的深度的函数$D$的表达式为:
 
 \begin{equation*}
-    D(\beta, x, t) = 
+    % D(\beta, x, t) = 
+    % h - \left(l_{sea} - x\right)\tan \alpha
+    D(\beta, t) = 
     h - \left(l_{sea} - x\right)\tan \alpha
 \end{equation*}
 
 即:
 
 \begin{equation}
-    D(\beta, x, t) = 
+    % D(\beta, x, t) = 
+    % h - \left(x - t\cos \beta \right)\tan \alpha
+    D(\beta, t) = 
     h - \left(x - t\cos \beta \right)\tan \alpha
 \end{equation}
 
@@ -292,13 +296,62 @@ $A$点的坐标为:
 由 [条带宽度计算公式] ，根据船$P$当前的位置，可得条带宽度函数$w$的表达式为:
 
 \begin{equation}
-    w(\beta, x, t) = 
-    D(\beta, x, t)\cdot 
+    % w(\beta, x, t) = 
+    % D(\beta, x, t)\cdot 
+    % \left(
+    %     \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
+    %     \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
+    % \right)\cdot
+    % \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
+    w(\beta, t) = 
+    D(\beta, t)\cdot 
     \left(
         \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
         \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
     \right)\cdot
     \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
+\end{equation}
+
+此时，对自变量$t$定积分即可求得代表船的点$P$在整个目标海域的条带总面积，即总面积$S$的函数表达式为:
+
+\begin{equation}
+    % S(\beta, x) = 
+    % \int _{0} ^{R(\beta, x)} {
+    %     w(\beta, x, t)dt
+    % }
+    S(\beta) = 
+    \int _{0} ^{R(\beta)} {
+        w(\beta, t)dt
+    }
+\end{equation}
+
+其中$R(\beta)$函数表示$t$的取值上限，且有:
+
+\begin{equation}
+    % R(\beta, x) = \min\left(
+    %     \left|\frac{x - l_{sea}}{\cos \beta}\right|, 
+    %     \left|\frac{w_{sea}}{\sin \beta}\right|
+    % \right)
+    R(\beta) = 
+    \begin{cases}
+        \min \left \{
+                \frac{x}{\cos \beta}, 
+                \frac{w_{sea}}{\sin \beta}
+            \right \}
+        & \beta \in \left(0, \frac{\pi}{2} \right)\\
+        w_{sea} & \beta = \frac{\pi}{2}\\
+        \min \left \{
+                \frac{x - l_{sea}}{\cos \beta}, 
+                \frac{w_{sea}}{\sin \beta}
+            \right \}
+        & \beta \in \left(\frac{\pi}{2}, \pi \right) 
+    \end{cases}
+\end{equation}
+
+为了让这一测线测得的条带宽度尽可能大, 考虑令条带面积的导数为零，得到使其最大的$\hat \beta$。即求解$\hat \beta$使得：
+
+\begin{equation}
+    \frac{dS(\hat \beta)}{d\beta} = 0
 \end{equation}
 
 \mcmSubsubsection{计算流程}
