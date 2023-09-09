@@ -2,7 +2,7 @@
 
 \mcmSubsection{问题1：通过解三角行求出多波束探测的覆盖宽度}
 
-在问题1中，$\alpha$是测垂面与海底坡面的交线与水平面的夹角，实际上正是测坡角。也就是说，在问题一种，存在等式：
+在问题1中，$\alpha$是测垂面与海底坡面的交线与水平面的夹角，实际上正是测坡角。也就是说，在问题一中，存在等式：
 
 \begin{equation}
     \gamma = \alpha
@@ -53,22 +53,53 @@
 解上述方程组以后，可得：
 
 \begin{equation}
-    AC = x_1 + x_2 
-       = \frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\varphi - \theta)}D
+\begin{aligned}
+    AC &= x_1 + x_2 \\
+       &= \frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\varphi + \theta)}D \\
+       &= D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right)
+\end{aligned}
 \end{equation}
 
 综上，可得如下结论：
 
-\textbf{关键结论1：宽度覆盖公式}
+\begin{mcmTheorem}{覆盖宽度公式}
+    探测船的覆盖宽度$W$，与它的多波束换能器的开角$\theta$、测坡角$\gamma$、距离海底的深度$D$有关，满足如下等式：
 
-探测船的覆盖宽度$W$，与它的多波束换能器的开角$\theta$、测坡角$\gamma$、距离海底的深度$D$有关，满足如下等式：
+    \begin{equation}
+        W = 
+        Proj AC = 
+        D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
+        \label{equ:覆盖宽度公式}
+    \end{equation}
+\end{mcmTheorem}
+
+在问题一的情景中，当测量船与中心位置有一定偏移时，深度会发生改变，并且变化量$\Delta D$如图\ref{fig:深度变化}所示。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{res/img/深度变化.png}
+    \caption{深度变化}
+    \label{fig:深度变化}
+\end{figure}
+
+其中，线段$FC$是海平面，平行于线段$AB$，点$E$处是中心位置。为方便描述，设$\overrightarrow{FC}$、$\overrightarrow{EH}$分别为$x$轴、$y$轴正方向。
+
+根据几何关系，易得：
 
 \begin{equation}
-    W = 
-    Proj AC = 
-    \left(\frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\varphi - \theta)}D\right) \cdot \cos \gamma
-    \label{equ:覆盖宽度公式}
+    \Delta D = d\tan\gamma
 \end{equation}
+
+故中心距离
+
+\textbf{关键结论2：海底深度函数}
+
+以海底深度由深到浅为正方向，确定某个中心位置$O$后，某个位置的深度$D(x)$与测坡角$\gamma$、中心位置的深度$D(0)$、与中心的距离$d$有关，满足如下公式：
+
+\begin{equation}
+    D(d) = D(0) + d\tan\gamma
+\end{equation}
+
 
 重叠率定义为：
 
@@ -78,7 +109,7 @@
 
 其中$d$为距离中心点处的距离，$W$为覆盖宽度。
 
-当$\theta = 120^\circ$，$\alpha=\gamma=1.5^\circ$，中心距离$D_0 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，中心距离$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}

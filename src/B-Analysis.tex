@@ -43,7 +43,7 @@
 \end{enumerate}
 
 % ==================================================
-% @brief    模型假设
+% @brief    模型假设$$
 % ==================================================
 
 \mcmSection{符号说明及名称定义}
@@ -51,11 +51,19 @@
 \mcmSubsection{名称定义}
 
 \begin{enumerate}
-    \item \textbf{测垂面}是指与测线方向垂直的平面（A plane perpendicular to the survey line.）；
-    \item \textbf{测坡线}是指测线的测垂面与海底坡面的交线；
-    \item \textbf{测坡角}是指测坡线与水平面的夹角（$\gamma$）；
-    \item \textbf{海底坡面的倾斜角}是指海底坡面与水平面的夹角。
+    \item \textbf{测垂面}是指与测线方向垂直的平面（如图\ref{fig:符号说明}中平面$GIH$）；
+    \item \textbf{测坡线}是指测线的测垂面与海底坡面的交线（如图\ref{fig:符号说明}中线段$IH$）；
+    \item \textbf{测坡角}是指测坡线与水平面的夹角（如图\ref{fig:符号说明}中线段$IH$与水平面的夹角）；
+    \item \textbf{海底坡面的倾斜角}是指海底坡面与水平面的夹角（如图\ref{fig:符号说明}中$\alpha$角）。\newline
 \end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{res/img/符号说明.png}
+    \caption{符号说明}
+    \label{fig:符号说明}
+\end{figure}
+
 
 \mcmSubsection{符号说明}
 
@@ -73,15 +81,9 @@
         \hline
         \textbf{\fontsize{13}{1.5}{符号}}            & \textbf{\fontsize{13}{1.5}{意义}}                       \\ \hline
 
-        $horizontal$     & 水平面     \\
-        $Undersea slope$      & 海底坡面 \\
-        $$       & 测垂面 \\
-        $w_{n,l}$     & 文档$n$中第$l$个分词对应的主题编号     \\
-        $\varphi_{k}$ & 主题$k$的词汇分布               \\
-        $M_{diff}$    & 题目难度矩阵                   \\
-        $L_{weight}$  & 题目难度值                    \\
-        $L_D$         & 题目难度系数序列                 \\
-        $S_{level}$   & 难度度量等级集合                 \\ \hline
+        $\alpha$     & 海底坡面的倾斜角     \\
+        $\beta$      & 测线的方向角 \\
+        $\gamma$       & 测坡角 \\ \hline
         \end{tabular}
     
     }
