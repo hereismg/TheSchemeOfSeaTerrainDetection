@@ -69,7 +69,7 @@
         W = 
         Proj AC = 
         D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
-        \label{equ:覆盖宽度公式}
+        % \label{equ:覆盖宽度公式}
     \end{equation}
 \end{mcmTheorem}
 
@@ -233,6 +233,126 @@
 \mcmSubsection{问题三：为海域设计排线方案}
 
 \mcmSubsubsection{方案设计与证明}
+
+考虑一般情况：
+
+因此，有以下简化模型：
+
+假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = w_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{res/img/一般情况下通式计算几何图.png}
+    \caption{一般情况下通式计算几何图}
+    \label{fig:一般情况下通式计算几何图}
+\end{figure}
+
+不难得出，坡面的解析式为:
+
+\begin{equation}
+    p: \ 
+    (x - l_{sea})\tan \alpha + z = 0
+\end{equation}
+
+$A$点的坐标为:
+
+\begin{equation}
+    A = (l_{sea} - x, 0, h)
+\end{equation}
+
+由于单位向量$\tau_\text{测} = (\cos \beta, \sin \beta, 0)$，结合$|AP| = t$，可以得出$P$的坐标为:
+
+\begin{equation}
+    P = (l_{sea} - x + t\cos \beta, 
+        t\sin \beta, 
+        h)
+\end{equation}
+
+当前船（点$P$）的位置代入坡面解析式后，可以得出此时距离海水的深度的函数$D$的表达式为:
+
+\begin{equation*}
+    % D(\beta, x, t) = 
+    % h - \left(l_{sea} - x\right)\tan \alpha
+    D(\beta, t) = 
+    h - \left(l_{sea} - x\right)\tan \alpha
+\end{equation*}
+
+即:
+
+\begin{equation}
+    % D(\beta, x, t) = 
+    % h - \left(x - t\cos \beta \right)\tan \alpha
+    D(\beta, t) = 
+    h - \left(x - t\cos \beta \right)\tan \alpha
+\end{equation}
+
+由 [测坡角公式] ，根据船$P$当前的位置，可得测坡角函数$\gamma$的表达式为:
+
+\begin{equation}
+    \gamma(\beta) = 
+    \arctan \left(|\sin \beta| \tan \alpha\right)
+\end{equation}
+
+由 [条带宽度计算公式] ，根据船$P$当前的位置，可得条带宽度函数$w$的表达式为:
+
+\begin{equation}
+    % w(\beta, x, t) = 
+    % D(\beta, x, t)\cdot 
+    % \left(
+    %     \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
+    %     \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
+    % \right)\cdot
+    % \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
+    w(\beta, t) = 
+    D(\beta, t)\cdot 
+    \left(
+        \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
+        \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
+    \right)\cdot
+    \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
+\end{equation}
+
+此时，对自变量$t$定积分即可求得代表船的点$P$在整个目标海域的条带总面积，即总面积$S$的函数表达式为:
+
+\begin{equation}
+    % S(\beta, x) = 
+    % \int _{0} ^{R(\beta, x)} {
+    %     w(\beta, x, t)dt
+    % }
+    S(\beta) = 
+    \int _{0} ^{R(\beta)} {
+        w(\beta, t)dt
+    }
+\end{equation}
+
+其中$R(\beta)$函数表示$t$的取值上限，且有:
+
+\begin{equation}
+    % R(\beta, x) = \min\left(
+    %     \left|\frac{x - l_{sea}}{\cos \beta}\right|, 
+    %     \left|\frac{w_{sea}}{\sin \beta}\right|
+    % \right)
+    R(\beta) = 
+    \begin{cases}
+        \min \left \{
+                \frac{x}{\cos \beta}, 
+                \frac{w_{sea}}{\sin \beta}
+            \right \}
+        & \beta \in \left(0, \frac{\pi}{2} \right)\\
+        w_{sea} & \beta = \frac{\pi}{2}\\
+        \min \left \{
+                \frac{x - l_{sea}}{\cos \beta}, 
+                \frac{w_{sea}}{\sin \beta}
+            \right \}
+        & \beta \in \left(\frac{\pi}{2}, \pi \right) 
+    \end{cases}
+\end{equation}
+
+为了让这一测线测得的条带宽度尽可能大, 考虑令条带面积的导数为零，得到使其最大的$\hat \beta$。即求解$\hat \beta$使得：
+
+\begin{equation}
+    \frac{dS(\hat \beta)}{d\beta} = 0
+\end{equation}
 
 \mcmSubsubsection{计算流程}
 
