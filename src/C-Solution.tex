@@ -7,6 +7,8 @@
 
 \mcmSubsection{问题1：通过解三角行求出多波束探测的覆盖宽度}
 
+\mcmSubsubsection{覆盖宽度公式}
+
 在问题1中，$\alpha$是测垂面与海底坡面的交线与水平面的夹角，实际上正是测坡角。也就是说，在问题一中，存在等式：
 
 \begin{equation}
@@ -78,6 +80,8 @@
     \end{equation}
 \end{mcmTheorem}
 
+\mcmSubsubsection{海底深度公式}
+
 在问题一的情景中，当测量船与中心位置有一定偏移时，深度会发生改变，并且变化量$\Delta D$如图\ref{fig:深度变化}所示。
 
 
@@ -107,23 +111,40 @@
     \end{equation}
 \end{mcmTheorem}
 
+\mcmSubsubsection{总结}
+
 借原题中测线相互平行且海底地形平坦时的重叠率定义：
 
 \begin{equation}
     \eta = 1 - \frac{d}{W}
 \end{equation}
 
-（其中$d$为相邻两条测线的间距，$W$为条带的覆盖宽度）
+其中$d$为相邻两条测线的间距，$W$为条带的覆盖宽度。
 
-本文重新定义在均匀坡度下，当测线方向与海底坡面的法向在水平面上投影垂直时，重叠率为：
+在本小节中，当测线方向与海底坡面的法向在水平面上投影垂直时，重叠率为：
 
 \begin{equation}
     \eta = 1-\frac{2d}{S_W}
 \end{equation}
 
-（其中$d$为相邻两条测线的间距，$S_W$为相邻两条条带的覆盖宽度之和）
+其中$d$为相邻两条测线的间距，$S_W$为相邻两条条带的覆盖宽度之和。
 
-当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，带入覆盖宽度公式和重叠率定义，得出下列结果：
+综上所述，存在方程组：
+
+\begin{equation}
+    \begin{cases}
+        W = Proj AC = D \sin\frac{\theta}{2}\left[
+            \frac{1}{\cos(\frac{\theta}{2}+\gamma)} +
+            \frac{1}{\cos(\frac{\theta}{2}-\gamma)}
+        \right] \cos\gamma \\
+        D(d) = D(0) + d\tan\alpha \\
+        \eta = 1 - \frac{2d}{S_w}
+    \end{cases}
+\end{equation}
+
+其中，$\theta$为多波束换能器的开角，$D(0)$为中心海域的深度，$S_w$为覆盖宽度
+
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，带入上述模型，计算可以得出结果：
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
