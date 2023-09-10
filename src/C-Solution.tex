@@ -508,13 +508,19 @@ $A$点的坐标为:
 
 联立式(27)、式(28)、式(29)，最终可解得$x_i$的值，即可确定下一条测线的最优方案。
 
-循环执行第二步，并设立边界条件$ x <= 2W_c $，即可求出一组测量长度最短、可完全覆盖整个待测海域的测线。
+循环执行第二步，并设立边界条件$ x \leq 2W_c $，即可求出一组测量长度最短、可完全覆盖整个待测海域的测线。
 
 \mcmSubsubsection{计算结果}
 
 
 
 \mcmSubsection{问题四：在已有数据情况下的测线方案设计}
+
+在问题四中，定义重叠率为：
+
+\begin{equation}
+    \eta = \frac{1}{2} \left( \frac{\Delta S}{S_i} + \frac{\Delta S}{S_{i+1}} \right)
+\end{equation}
 
 \begin{figure}[h]
     \centering
