@@ -24,7 +24,7 @@
 
 已知$\vartriangle PAB$是以$PA$、$PB$为腰的等腰三角形，其中，点$C$是$BP$上任意一点, PM是AB的垂线，且$\angle APB = \theta$, $\angle CAB = \gamma$, $PM = D$（如图\ref{fig:理想情况下的覆盖区域几何图}），求出$AC$在$AB$上的投影。
 
-\begin{figure}[h]   
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.4]{res/img/理想情况下的覆盖区域几何图.png}
     \caption{\href{https://www.geogebra.org/m/xcvstdzg}{\textcolor{blue}{理想情况下的覆盖区域几何图}}}
@@ -49,7 +49,7 @@
 
 \begin{equation}
     \begin{cases}
-        \varphi = \frac{\pi - \theta}{2} - \gamma \\
+        \varphi = \frac{\pi - \theta}{2} - \gamma                 \\
         \frac{\sin \frac{\theta}{2}}{x_1} = \frac{\sin\varphi}{D} \\
         \frac{\sin \frac{\theta}{2}}{x_2} = \frac{\sin(\pi-\theta-\varphi)}{D}
     \end{cases}
@@ -58,21 +58,21 @@
 解上述方程组以后，可得：
 
 \begin{equation}
-\begin{aligned}
-    AC &= x_1 + x_2 \\
-       &= \frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\varphi + \theta)}D \\
-       &= D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right)
-\end{aligned}
+    \begin{aligned}
+        AC & = x_1 + x_2                                                                                                           \\
+           & = \frac{\sin\frac{\theta}{2}}{\sin\varphi}D + \frac{\sin\frac{\theta}{2}}{\sin(\varphi + \theta)}D                    \\
+           & = D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right)
+    \end{aligned}
 \end{equation}
 
 综上，可得如下结论：
 
 \begin{mcmTheorem}{覆盖宽度公式}
-    探测船的覆盖宽度$W$，与它的多波束换能器的开角$\theta$、测坡角$\gamma$、距离海底的深度$D$有关，满足如下等式：
+    测量船的覆盖宽度$W$，与它的多波束换能器的开角$\theta$、测坡角$\gamma$、距离海底的深度$D$有关，满足如下等式：
 
     \begin{equation}
-        W = 
-        Proj AC = 
+        W =
+        Proj AC =
         D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma
         % \label{equ:覆盖宽度公式}
     \end{equation}
@@ -129,14 +129,16 @@
 % \usepackage{booktabs}
 \begin{table}[h]
     \centering
-    \caption{\textbf{问题1的计算结果}}
-    \begin{tabular}{@{}ccllllllll@{}}
-    \toprule
-    测线距中心点处的距离/$m$  & $-800$ & $-600$ & $-400$ & $-200$ & $0$ & $200$ & $400$ & $600$ & $800$ \\ \midrule
-    海水深度/$m$        &      &      &      &      & 70  &     &     &     &     \\
-    覆盖宽度/$m$        &      &      &      &      &   &     &     &     &     \\
-    与前一条测线的重叠率/$\%$ &   -  &      &      &      &   &     &     &     &     \\ \bottomrule
-    \end{tabular}
+    \caption{\textbf{问题1的计算结果(保留两位小数)}}
+    \scalebox{0.7}{
+        \begin{tabular}{cccccccccc}
+            \toprule
+            \begin{tabular}[c]{@{}l@{}}测线距中心点处的距离/$m$\end{tabular}  & $-800$   & $-600$   & $-400$   & $-200$   & $0$      & $200$    & $400$    & $600$    & $800$    \\ \midrule
+            海水深度/$m$                                                      & $90.95$  & $85.71$  & $80.47$  & $75.24$  & $70.00$  & $64.76$  & $59.53$  & $54.29$  & $49.05$  \\
+            覆盖宽度/$m$                                                      & $315.71$ & $297.53$ & $279.35$ & $261.17$ & $242.99$ & $224.81$ & $206.63$ & $188.45$ & $170.27$ \\
+            \begin{tabular}[c]{@{}l@{}}与前一条测线的重叠率/$\%$\end{tabular} & -        & $34.77$  & $30.66$  & $26.00$  & $20.66$  & $14.49$  & $7.29$   & $-1.25$  & $-11.51$ \\ \bottomrule
+        \end{tabular}
+    }
 \end{table}
 
 
@@ -194,26 +196,26 @@
 不妨令$x_0 = -1$，则有:
 
 \begin{equation}
-    v_s 
+    v_s
     = (x_0, y_0, z_0)
-    = \left( 
-            -1,
-            \cot \beta,
-            \tan \alpha
-      \right)
+    = \left(
+    -1,
+    \cot \beta,
+    \tan \alpha
+    \right)
 \end{equation}
 
 因而:
 
 \begin{equation*}
-    \tan <l_s, ABEF> 
+    \tan <l_s, ABEF>
     = \frac {\tan \alpha} {\sqrt{(-1)^2 + \cot ^2 \beta}}
 \end{equation*}
 
 所以，$l_s$与平面$ABEF$的夹角为
 
 \begin{equation}
-    <l_s, ABEF> 
+    <l_s, ABEF>
     = \arctan \left(|\sin \beta| \cdot  \tan \alpha\right)
     = \gamma
 \end{equation}
@@ -231,20 +233,25 @@
 % \usepackage{multirow}
 \begin{table}[h]
     \centering
-    \caption{问题2的计算结果}
-    \begin{tabular}{cccccccccc}
-    \hline
-    \multicolumn{2}{c}{\multirow{2}{*}{覆盖宽度/m}} & \multicolumn{8}{c}{测量船距海域中心点处的距离/海里}        \\ \cline{3-10} 
-    \multicolumn{2}{c}{}                        & 0 & 0.3 & 0.6 & 0.9 & 1.2 & 1.5 & 1.8 & 2.1 \\ \hline
-    \multirow{8}{*}{测线方向夹角/°}       & 0         &   &     &     &     &     &     &     &     \\
-                                    & 45        &   &     &     &     &     &     &     &     \\
-                                    & 90        &   &     &     &     &     &     &     &     \\
-                                    & 135       &   &     &     &     &     &     &     &     \\
-                                    & 180       &   &     &     &     &     &     &     &     \\
-                                    & 225       &   &     &     &     &     &     &     &     \\
-                                    & 270       &   &     &     &     &     &     &     &     \\
-                                    & 315       &   &     &     &     &     &     &     &     \\ \hline
-    \end{tabular}
+    \caption{\textbf{问题2的计算结果(保留两位小数)}}
+    % 调整行距
+    \renewcommand\arraystretch{1.5}
+    \scalebox{0.85}{
+        \begin{tabular}{cccccccccc}
+            \hline
+            \multicolumn{2}{c}{\multirow{2}{*}{覆盖宽度/m}} & \multicolumn{8}{c}{测量船距海域中心点处的距离/海里}                                                                         \\ \cline{3-10}
+            \multicolumn{2}{c}{}                            & 0                                                   & 0.3    & 0.6    & 0.9    & 1.2    & 1.5    & 1.8    & 2.1             \\ \hline
+            \multirow{8}{*}{测线方向夹角/°}                 & 0                                                   & 415.69 & 466.09 & 516.49 & 566.89 & 617.29 & 667.69 & 718.09 & 768.48 \\
+                                                            & 45                                                  & 416.12 & 451.79 & 487.47 & 523.14 & 558.82 & 594.49 & 630.16 & 665.84 \\
+                                                            & 90                                                  & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 \\
+                                                            & 135                                                 & 416.12 & 380.45 & 344.77 & 309.10 & 273.42 & 237.75 & 202.08 & 166.40 \\
+                                                            & 180                                                 & 415.69 & 365.29 & 314.89 & 264.50 & 214.10 & 163.70 & 113.30 & 62.90  \\
+                                                            & 225                                                 & 416.12 & 380.45 & 344.77 & 309.10 & 273.42 & 237.75 & 202.08 & 166.40 \\
+                                                            & 270                                                 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 & 416.55 \\
+                                                            & 315                                                 & 416.12 & 451.79 & 487.47 & 523.14 & 558.82 & 594.49 & 630.16 & 665.84 \\ \hline
+        \end{tabular}
+    }
+
 \end{table}
 
 \mcmSubsection{问题三：为海域设计排线方案}
@@ -267,7 +274,7 @@
 不难得出，坡面的解析式为:
 
 \begin{equation}
-    p: \ 
+    p: \
     (x - l_{sea})\tan \alpha + z = 0
 \end{equation}
 
@@ -280,9 +287,9 @@ $A$点的坐标为:
 由于单位向量$\tau_\text{测} = (\cos \beta, \sin \beta, 0)$，结合$|AP| = t$，可以得出$P$的坐标为:
 
 \begin{equation}
-    P = (l_{sea} - x + t\cos \beta, 
-        t\sin \beta, 
-        h)
+    P = (l_{sea} - x + t\cos \beta,
+    t\sin \beta,
+    h)
 \end{equation}
 
 当前船（点$P$）的位置代入坡面解析式后，可以得出此时距离海水的深度的函数$D$的表达式为:
@@ -290,7 +297,7 @@ $A$点的坐标为:
 \begin{equation*}
     % D(\beta, x, t) = 
     % h - \left(l_{sea} - x\right)\tan \alpha
-    D(\beta, t) = 
+    D(\beta, t) =
     h - \left(l_{sea} - x\right)\tan \alpha
 \end{equation*}
 
@@ -299,14 +306,14 @@ $A$点的坐标为:
 \begin{equation}
     % D(\beta, x, t) = 
     % h - \left(x - t\cos \beta \right)\tan \alpha
-    D(\beta, t) = 
+    D(\beta, t) =
     h - \left(x - t\cos \beta \right)\tan \alpha
 \end{equation}
 
 由定理\ref{theorem:测坡角公式}，根据船$P$当前的位置，可得测坡角函数$\gamma$的表达式为:
 
 \begin{equation}
-    \gamma(\beta) = 
+    \gamma(\beta) =
     \arctan \left(|\sin \beta| \tan \alpha\right)
 \end{equation}
 
@@ -320,11 +327,11 @@ $A$点的坐标为:
     %     \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
     % \right)\cdot
     % \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
-    W(\beta, t) = 
-    D(\beta, t)\cdot 
+    W(\beta, t) =
+    D(\beta, t)\cdot
     \left(
-        \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
-        \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
+    \frac{1}{\cos (\frac{\theta}{2} + \gamma(\beta))} +
+    \frac{1}{\cos (\frac{\theta}{2} - \gamma(\beta))}
     \right)\cdot
     \sin {\frac{\theta}{2}}\cdot \cos \gamma(\beta)
 \end{equation}
@@ -336,7 +343,7 @@ $A$点的坐标为:
     % \int _{0} ^{R(\beta, x)} {
     %     w(\beta, x, t)dt
     % }
-    S(\beta) = 
+    S(\beta) =
     \int _{0} ^{R(\beta)} {
         W(\beta, t)dt
     }
@@ -349,19 +356,19 @@ $A$点的坐标为:
     %     \left|\frac{x - l_{sea}}{\cos \beta}\right|, 
     %     \left|\frac{w_{sea}}{\sin \beta}\right|
     % \right)
-    R(\beta) = 
+    R(\beta) =
     \begin{cases}
         \min \left \{
-                \frac{x}{\cos \beta}, 
-                \frac{w_{sea}}{\sin \beta}
-            \right \}
-        & \beta \in \left(0, \frac{\pi}{2} \right)\\
-        w_{sea} & \beta = \frac{\pi}{2}\\
+        \frac{x}{\cos \beta},
+        \frac{w_{sea}}{\sin \beta}
+        \right \}
+                & \beta \in \left(0, \frac{\pi}{2} \right)   \\
+        w_{sea} & \beta = \frac{\pi}{2}                      \\
         \min \left \{
-                \frac{x - l_{sea}}{\cos \beta}, 
-                \frac{w_{sea}}{\sin \beta}
-            \right \}
-        & \beta \in \left(\frac{\pi}{2}, \pi \right) 
+        \frac{x - l_{sea}}{\cos \beta},
+        \frac{w_{sea}}{\sin \beta}
+        \right \}
+                & \beta \in \left(\frac{\pi}{2}, \pi \right)
     \end{cases}
 \end{equation}
 
@@ -374,14 +381,14 @@ $A$点的坐标为:
 不难得出，当$\hat \beta = \frac{\pi}{2}$时，有条带面积最大值为：
 
 \begin{equation}
-    S(\hat \beta) = 
+    S(\hat \beta) =
     w_{sea} \cdot (h - x\tan \alpha) \cdot \left[
         \frac{1}{\cos \left(
             \frac{\theta}{2} + \alpha
-        \right)} + \frac{1}{\cos \left(
+            \right)} + \frac{1}{\cos \left(
             \frac{\theta}{2} - \alpha
-        \right)}
-    \right]\cdot \sin \frac{\theta}{2} \cdot \cos \alpha
+            \right)}
+        \right]\cdot \sin \frac{\theta}{2} \cdot \cos \alpha
 \end{equation}
 
 因此，当测线的方向角$\beta = \frac{\pi}{2}$时相对优秀。
@@ -394,10 +401,10 @@ $A$点的坐标为:
 
 \begin{equation}
     \begin{cases}
-        W_i & = D_i\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma\\
-        W_{i + 1} & = D_{i + 1}\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma\\
-        \eta & = 1 - \frac{2d_i}{W_i + W_{i + 1}}\\
-        d_i & = \frac{D_i - D_{i + 1}}{\tan \gamma}
+        W_i       & = D_i\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma       \\
+        W_{i + 1} & = D_{i + 1}\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma \\
+        \eta      & = 1 - \frac{2d_i}{W_i + W_{i + 1}}                                                                                                              \\
+        d_i       & = \frac{D_i - D_{i + 1}}{\tan \gamma}
     \end{cases}
 \end{equation}
 
@@ -405,11 +412,11 @@ $A$点的坐标为:
 
 \begin{equation}
     \begin{cases}
-        k = 
+        k =
         \sin\frac{\theta}{2}\left(
-            \frac{1}{\cos(\frac{\theta}{2}+\gamma)} + 
-            \frac{1}{\cos(\frac{\theta}{2}-\gamma)}
-        \right) \cdot \cos \gamma\\
+        \frac{1}{\cos(\frac{\theta}{2}+\gamma)} +
+        \frac{1}{\cos(\frac{\theta}{2}-\gamma)}
+        \right) \cdot \cos \gamma \\
         m = D_i
     \end{cases}
 \end{equation}
@@ -418,16 +425,16 @@ $A$点的坐标为:
 
 \begin{equation}
     \begin{cases}
-        W_i = km\\
-        W_{i + 1} = \left[\frac{4k}{k(1 - \eta) \tan \gamma + 2} - 1\right]m\\
-        D_{i + 1} = \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right]m\\
+        W_i = km                                                             \\
+        W_{i + 1} = \left[\frac{4k}{k(1 - \eta) \tan \gamma + 2} - 1\right]m \\
+        D_{i + 1} = \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right]m  \\
         d_i = \frac{2m}{\tan \gamma} - \frac{4m}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
     \end{cases}
 \end{equation}
 
 考虑到使用平面几何求解的困难性，接下来使用解析几何的方式求解$D_1$，如图所示：
 
-\begin{figure}[h]   
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.3]{res/img/解析式几何推导.png}
     \caption{\href{https://www.geogebra.org/m/ycxg4tw9}{\textcolor{blue}{解析式几何推导}}}
@@ -444,10 +451,10 @@ $A$点的坐标为:
 
 \begin{align}
     D_{i} = & \begin{cases}
-        D_1 & \text{ if } i = 1 \\
-        D_{i - 1} \cdot \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right] & \text{ otherwise }
-    \end{cases}\\
-    d_i = & \frac{2D_i}{\tan \gamma} - \frac{4D_i}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
+                  D_1                                                                    & \text{ if } i = 1  \\
+                  D_{i - 1} \cdot \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right] & \text{ otherwise }
+              \end{cases} \\
+    d_i =   & \frac{2D_i}{\tan \gamma} - \frac{4D_i}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
 \end{align}
 
 \paragraph{方案总结}
@@ -471,7 +478,7 @@ $A$点的坐标为:
 设第一条测线在以东向西为正方向时东西方向上的坐标为$x_1$（米），设海域中心在在以东向西为正方向时东西方向上的坐标为$W_c$（米），设海域中心点处的海水深度为$D_c$（米），则按图4模型可列方程：
 
 \begin{equation}
-    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \varphi}{\sin \frac{\theta}{2} \cos \alpha} 
+    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \varphi}{\sin \frac{\theta}{2} \cos \alpha}
 \end{equation}
 
 从而解得$x_i$，进一步算得第一条测线的水深$D_1$（米）与覆盖宽度$CW_1$（米），其中$\gamma = \alpha$：
@@ -584,7 +591,7 @@ $A$点的坐标为:
 在上述所有的方向中，平坦率最大值所对应的方向$\hat \beta$，认为是测线方向最合适的。随后，以该方向为基础，每间隔$d$增加一条测线，延伸到海域外围为止。随后，计算所有测线的平坦率。若有$n$条测线，对于第$i$条测线，其平坦率设为$\varepsilon_i$，并且所有测线平坦率对应的平均值，视为整个海域的平坦率，则有:
 
 \begin{equation}
-    \overline{\varepsilon} = \frac{1}{n} \sum^{n}_{i=1}\varepsilon_i 
+    \overline{\varepsilon} = \frac{1}{n} \sum^{n}_{i=1}\varepsilon_i
 \end{equation}
 
 \mcmSubsubsection{第三步：求出最优测线方案下的各种指标}
@@ -604,17 +611,17 @@ $A$点的坐标为:
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[scale=0.15]{res/img/覆盖域平面_几何.png}
-      \caption{覆盖域平面立体图}
-      \label{fig:覆盖域平面立体图}
+        \centering
+        \includegraphics[scale=0.15]{res/img/覆盖域平面_几何.png}
+        \caption{覆盖域平面立体图}
+        \label{fig:覆盖域平面立体图}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[scale=0.15]{res/img/覆盖域平面_截面正视图.png}
-      \caption{覆盖域截面正视图}
-      \label{fig:覆盖域截面正视图}
+        \centering
+        \includegraphics[scale=0.15]{res/img/覆盖域平面_截面正视图.png}
+        \caption{覆盖域截面正视图}
+        \label{fig:覆盖域截面正视图}
     \end{subfigure}
     \caption{\href{https://www.geogebra.org/m/zafwcq6e}{\textcolor{blue}{覆盖域截面图}}}
     \label{fig:覆盖域截面图}
@@ -630,29 +637,29 @@ $A$点的坐标为:
 \end{equation}
 
 \begin{mcmTheorem}{覆盖域平面方程}
-对于三维坐标系中的P$(x_1, y_1, k)$, Q$(x_2, y_2, k)$，PQ为测线，那么该测线覆盖域平面的法向量$(a, b, c)$为：
+    对于三维坐标系中的P$(x_1, y_1, k)$, Q$(x_2, y_2, k)$，PQ为测线，那么该测线覆盖域平面的法向量$(a, b, c)$为：
 
-\begin{equation}
-    \begin{cases}
-        a = \frac{y_2-y_1}{x_1-x_2} \\
-        b = 1 \\
-        c = \pm \sqrt{\tan^2\frac{\theta}{2} \cdot (a^2+1)}
-    \end{cases}
-\end{equation}
+    \begin{equation}
+        \begin{cases}
+            a = \frac{y_2-y_1}{x_1-x_2} \\
+            b = 1                       \\
+            c = \pm \sqrt{\tan^2\frac{\theta}{2} \cdot (a^2+1)}
+        \end{cases}
+    \end{equation}
 
-令$c \geq 0$，则平面方程分别为：
+    令$c \geq 0$，则平面方程分别为：
 
-\begin{equation}
-    \begin{cases}
-        ax + by + cz - ax_1 - by_1 - ck = 0 \\
-        ax + by - cz - ax_1 - by_1 + ck = 0
-    \end{cases}
-\end{equation}
+    \begin{equation}
+        \begin{cases}
+            ax + by + cz - ax_1 - by_1 - ck = 0 \\
+            ax + by - cz - ax_1 - by_1 + ck = 0
+        \end{cases}
+    \end{equation}
 \end{mcmTheorem}
 
 随后，附件里的值可以被绘制成三维空间下的离散点。取所有深度低于直线$PQ$的高度，且介于两平面之间的所有离散点作为点集，求解其凸包对应的面积，即为当前测线下的覆盖区域面积$S$。其俯视示意图如下所示。
 
-\begin{figure}[h]   
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.3]{res/img/俯视平面夹凸包示意图.png}
     \caption{\href{https://www.geogebra.org/m/vndf5wzp}{\textcolor{blue}{俯视平面夹凸包示意图}}}
@@ -661,7 +668,7 @@ $A$点的坐标为:
 
 与此同时，条带之间还会重叠，导致相邻两个条带的凸包有重合部分，如图所示：
 
-\begin{figure}[h]   
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.3]{res/img/俯视凸包重叠示意图.png}
     \caption{\href{https://www.geogebra.org/m/sf4pvazp}{\textcolor{blue}{俯视凸包重叠示意图}}}
