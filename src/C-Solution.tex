@@ -47,7 +47,7 @@
     \frac{\sin\angle CPM}{CM} = \frac{\sin\angle PCM}{PM}
 \end{equation*}
 
-综上所述，将对应的值带入方程，可得下列方程组：
+综上所述，将对应的值代入方程，可得下列方程组：
 
 \begin{equation}
     \begin{cases}
@@ -111,7 +111,7 @@
     \end{equation}
 \end{mcmTheorem}
 
-\mcmSubsubsection{总结}
+\mcmSubsubsection{数学模型}
 
 借原题中测线相互平行且海底地形平坦时的重叠率定义：
 
@@ -144,7 +144,7 @@
 
 其中，$\theta$为多波束换能器的开角，$D(0)$为中心海域的深度，$S_w$为覆盖宽度
 
-当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，带入上述模型，计算可以得出结果：
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，代入上述模型，计算可以得出结果（详见源码question1.py）.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -163,7 +163,9 @@
 \end{table}
 
 
-\mcmSubsection{问题二：一般情况下，重叠率求解}
+\mcmSubsection{问题二：求解测线方向角为$\beta$时的覆盖宽度}
+
+\mcmSubsubsection{测坡角公式}
 
 根据题意，可以抽象出如下的几何问题：
 
@@ -250,6 +252,24 @@
     \end{equation}
 \end{mcmTheorem}
 
+\mcmSubsubsection{数学模型}
+
+综合定理一、定理二和定理三联立可得解决第二问的数学模型：
+
+\begin{equation}
+    \begin{cases}
+        W =
+        Proj AC =
+        D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma   \\
+        D(d) = D(0) + d\tan\alpha \\
+        \gamma = \arctan(|\sin\beta| \cdot \tan\alpha)
+    \end{cases}
+\end{equation}
+
+其中$d$为测量船与中心海域的水平距离，$D(0)$是中心海域的深度。$\theta$为多波束换能器的开角，$\gamma$为测坡角.
+
+将$\theta = 120^\circ$，$\gamma = 1.5^\circ$，$D(0) = 120m$代入上述公式，计算得出结果（详见源码question2.py）。
+
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table}[h]
@@ -277,11 +297,9 @@
 
 \mcmSubsection{问题三：为海域设计排线方案}
 
-\mcmSubsubsection{方案设计与证明}
+\mcmSubsubsection{确定测线的方向角$\beta$}
 
-\paragraph{确定测线的方向角$\beta$}
-
-考虑一般情况，有以下简化模型：
+根据题意，有以下简化模型：
 
 假设有如下的直四棱柱$OBCD - O'B'C'D'$，其中$|OB| = l_{sea}$，$|OD| = w_{sea}$，$|OO'| = h$. 平面$BCEF$与平面$OBCD$之间的夹角为$\alpha$，$P$在交$O'B'$于点$A$，且$\angle B'AP = \beta$的射线上，且$|AP| = t$。需要求出代表船的点$P$在整个目标海域的条带总面积。计算过程如下：
 
@@ -414,7 +432,7 @@ $A$点的坐标为:
 
 因此，当测线的方向角$\beta = \frac{\pi}{2}$时相对优秀。
 
-\paragraph{确定相邻测线间距$d$}
+\mcmSubsubsection{确定相邻测线间距$d$}
 
 要使测量长度最短，在确定测线方向角的情况下，利用贪心的思想，尽可能控制重叠率$\eta = 10\%$。这样可以在单测线的测量长度不变的情况下，使测线条数减小，进而减小测量长度。
 
@@ -478,11 +496,31 @@ $A$点的坐标为:
     d_i =   & \frac{2D_i}{\tan \gamma} - \frac{4D_i}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
 \end{align}
 
-\paragraph{方案总结}
+\mcmSubsubsection{数学模型}
 
-在测线的方向角固定为$\beta = \frac{\pi}{2}$时，动态调整第$i$条与第$i + 1$条测线的间距$d_i$为以上表达式，以在保证整个海域均被覆盖的同时，控制重叠率为$\eta = 10\%$。
+综合以上讨论，存在如下的数学模型：
+
+\begin{equation}
+    \begin{cases}
+        S(\beta) = \int^{R(\beta)}_0 D(\beta, t) \left\{
+            \frac{1}{\cos\left[\frac{\theta}{2}+\gamma(\beta)\right]} +
+            \frac{1}{\cos\left[\frac{\theta}{2}-\gamma(\beta)\right]}
+        \right\} \cdot \sin\frac{\theta}{2} \cdot \cos \gamma(\beta) \\
+        D_{i} = \begin{cases}
+            D_1                                                                    &, \text{ if } i = 1  \\
+            D_{i - 1} \cdot \left[\frac{4}{k(1 - \eta) \tan \gamma + 2} - 1\right] &, \text{ otherwise }
+        \end{cases} \\
+        d_i = \frac{2D_i}{\tan \gamma} - \frac{4D_i}{k(1-\eta) \tan^2 \gamma + 2 \tan \gamma}
+    \end{cases}
+\end{equation}
+
+其中$S(\beta)$为覆盖面积，$D_i$为第$i$条测线的深度。
+
+解出上述模型可得，在测线的方向角固定为$\beta = \frac{\pi}{2}$时，动态调整第$i$条与第$i + 1$条测线的间距$d_i$为以上表达式，以在保证整个海域均被覆盖的同时，控制重叠率为$\eta = 10\%$。
 
 \mcmSubsubsection{计算流程}
+
+下面给出代码question3.py的算法流程：
 
 \textbf{第一步: 求出第一条测线的最优方案}
 
@@ -571,15 +609,9 @@ $A$点的坐标为:
     }
 \end{table}
 
-在该测线方案下，当满足模型假设情况时，该测线方案可完全覆盖所划海域，并可做到整体测量长度最短。测量长度为：132,988.489646273916米。
+在该测线方案下，当满足模型假设情况时，该测线方案可完全覆盖所划海域，并可做到整体测量长度最短。测量长度为：132,988.49米。
 
 \mcmSubsection{问题四：在已有数据情况下的测线方案设计}
-
-在问题四中，定义重叠率为：
-
-\begin{equation}
-    \eta = \frac{1}{2} \left( \frac{\Delta S}{S_i} + \frac{\Delta S}{S_{i+1}} \right)
-\end{equation}
 
 \begin{figure}[h]
     \centering
@@ -702,7 +734,13 @@ $A$点的坐标为:
 
 在不超过当前海域的情况下，往垂直于原测线且平行于水平面方向每隔等距离$d$为添加的测线，即可计算出所有测线对应的覆盖区域面积、相邻条带之间的重叠率$\eta$和测线的总长度。
 
+\mcmSubsubsection{计算结果}
+
 由程序计算，得到较优的测线的方向角$\beta \approx 26.88 ^{\circ} $。据此，可以用公式求解出最优的等距测线间隔$d$，进而求出想要的结果。
+
+
+
+
 
 % ==================================================
 % @brief    模型的评价与改进
