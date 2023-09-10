@@ -371,8 +371,6 @@ $A$点的坐标为:
     \frac{dS(\hat \beta)}{d\beta} = 0
 \end{equation}
 
-/TODO 猜测：
-
 不难得出，当$\hat \beta = \frac{\pi}{2}$时，有条带面积最大值为：
 
 \begin{equation}
@@ -391,8 +389,6 @@ $A$点的坐标为:
 \paragraph{确定相邻测线间距$d$}
 
 要使测量长度最短，在确定测线方向角的情况下，利用贪心的思想，尽可能控制重叠率$\eta = 10\%$。这样可以在单测线的测量长度不变的情况下，使测线条数减小，进而减小测量长度。
-
-% /TODO 这里是不是可以推导公式（第$i$条测线与第$i+1$条测线之间的距离$d_i$）?
 
 设第$i$条测线与第$i + 1$条测线之间的距离为$d_i$。已知海域中心的高度，可以用公式推导出第一条测线距离坡面的距离$D_1$。不妨先假设已知的是$D_1$。对于第$i$条测线，深度为$D_i$、覆盖宽度为$W_i$。根据重叠率公式、定理1和定理2不难得出以下方程组：
 
@@ -570,7 +566,28 @@ $A$点的坐标为:
 
 对于计算凸多边形的面积，使用向量的叉乘。假设一个凸多边形的顶点数为$n$，决定一个顶点后，可以用$n-3$条经过该点的直线将该凸多边形分成$n-3$个小三角形。对于每一个三角形，直接使用叉乘计算对应的面积即可。
 
-解下列方程组可得定理4：
+接下来，在给定测线经过点$P(x_1, y_1, k)$和点$Q(x_2, y_2, k)$的情况下，计算条带覆盖面积。容易得：随着船只沿着测线方向行进，多波形成一对平面，如下图所示：
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[scale=0.15]{res/img/覆盖域平面_几何.png}
+      \caption{覆盖域平面立体图}
+      \label{fig:覆盖域平面立体图}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[scale=0.15]{res/img/覆盖域平面_截面正视图.png}
+      \caption{覆盖域截面正视图}
+      \label{fig:覆盖域截面正视图}
+    \end{subfigure}
+    \caption{\href{https://www.geogebra.org/m/zafwcq6e}{\textcolor{blue}{覆盖域截面图}}}
+    \label{fig:覆盖域截面图}
+\end{figure}
+
+因此，可以通过解下列方程组得到定理4：
 
 \begin{equation}
     \begin{cases}
@@ -580,7 +597,7 @@ $A$点的坐标为:
 \end{equation}
 
 \begin{mcmTheorem}{覆盖域平面方程}
-对于三维坐标系中的P$(x_1, y_1, k)$, Q$(x_2, y_2, k)$，PQ为测线，那么该测线覆盖域平面为的法向量$(a, b, c)$为：
+对于三维坐标系中的P$(x_1, y_1, k)$, Q$(x_2, y_2, k)$，PQ为测线，那么该测线覆盖域平面的法向量$(a, b, c)$为：
 
 \begin{equation}
     \begin{cases}
@@ -599,6 +616,34 @@ $A$点的坐标为:
     \end{cases}
 \end{equation}
 \end{mcmTheorem}
+
+随后，附件里的值可以被绘制成三维空间下的离散点。取所有深度低于直线$PQ$的高度，且介于两平面之间的所有离散点作为点集，求解其凸包对应的面积，即为当前测线下的覆盖区域面积$S$。其俯视示意图如下所示。
+
+\begin{figure}[h]   
+    \centering
+    \includegraphics[scale=0.3]{res/img/俯视平面夹凸包示意图.png}
+    \caption{\href{https://www.geogebra.org/m/vndf5wzp}{\textcolor{blue}{俯视平面夹凸包示意图}}}
+    \label{fig:俯视平面夹凸包示意图}
+\end{figure}
+
+与此同时，条带之间还会重叠，导致相邻两个条带的凸包有重合部分，如图所示：
+
+\begin{figure}[h]   
+    \centering
+    \includegraphics[scale=0.3]{res/img/俯视凸包重叠示意图.png}
+    \caption{\href{https://www.geogebra.org/m/sf4pvazp}{\textcolor{blue}{俯视凸包重叠示意图}}}
+    \label{fig:俯视凸包重叠示意图}
+\end{figure}
+
+记第一个条带上点的凸包面积为$S_1$，第二个条带上点的凸包面积为$S_2$，两个条带重合部分上的凸包面积为$S_r$。定义相邻两个条带的重合率$\eta$为：
+
+\begin{equation}
+    \eta = 1 - \frac{2 S_r}{S_1 + S_2}
+\end{equation}
+
+在不超过当前海域的情况下，往垂直于原测线且平行于水平面方向每隔等距离$d$为添加的测线，即可计算出所有测线对应的覆盖区域面积、相邻条带之间的重叠率$\eta$和测线的总长度。
+
+由程序计算，得到较优的测线的方向角$\beta \approx 26.88 ^{\circ} $。据此，可以用公式求解出最优的等距测线间隔$d$，进而求出想要的结果。
 
 % ==================================================
 % @brief    模型的评价与改进
