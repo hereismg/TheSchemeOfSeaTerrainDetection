@@ -475,7 +475,7 @@ $A$点的坐标为:
 设第一条测线在以东向西为正方向时东西方向上的坐标为$x_1$（米），设海域中心在在以东向西为正方向时东西方向上的坐标为$W_c$（米），设海域中心点处的海水深度为$D_c$（米），则按图4模型可列方程：
 
 \begin{equation}
-    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \phi}{\sin \frac{\theta}{2} \cos \alpha} 
+    (W_c - x_1) \tan\alpha+D_c = \frac{x_1\sin \varphi}{\sin \frac{\theta}{2} \cos \alpha} 
 \end{equation}
 
 从而解得$x_i$，进一步算得第一条测线的水深$D_1$（米）与覆盖宽度$CW_1$（米），其中$\gamma = \alpha$：
@@ -523,7 +523,7 @@ $A$点的坐标为:
 首先定义某条测线的平坦率。在某条测线的海域下，从起点A到终点B之间的海底深度$D$的方差称为线段AB在该海域上的的平坦率。而对于问题四中给出的离散数据而言，应找到线段AB附近位置的海底深度数据，依次近似求出该线段的平坦率。定义该数据列表为$D_{i}$，平坦率$\varepsilon$满足：
 
 \begin{equation}
-    \varepsilon = \frac{1}{n} \sum^{n}_{i=1}(D_i - \overline{D} ) 
+    \varepsilon = \frac{1}{n} \sum^{n}_{i=1}(D_i - \overline{D} )^2
 \end{equation}
 
 其中，$\overline{D}$为深度的平均值。
@@ -554,8 +554,40 @@ $A$点的坐标为:
 
 最后，根据前面的计算过程，得出重叠率。
 
+解下列方程组可得定理4：
+
+\begin{equation}
+    \begin{cases}
+        a(x_1 - x_2) + b(y_1 - y_2) = 0 \\
+        \tan^2\frac{\theta}{2} = \frac{c^2}{a^2 + b^2}
+    \end{cases}
+\end{equation}
+
+\begin{mcmTheorem}{覆盖域平面方程}
+对于三维坐标系中的P$(x_1, y_1, k)$, Q$(x_2, y_2, k)$，PQ为测线，那么该测线覆盖域平面为的法向量$(a, b, c)$为：
+
+\begin{equation}
+    \begin{cases}
+        a = \frac{y_2-y_1}{x_1-x_2} \\
+        b = 1 \\
+        c = \pm \sqrt{\tan^2\frac{\theta}{2} \cdot (a^2+1)}
+    \end{cases}
+\end{equation}
+
+令$c \geq 0$，则平面方程分别为：
+
+\begin{equation}
+    \begin{cases}
+        ax + by + cz - ax_1 - by_1 - ck = 0 \\
+        ax + by - cz - ax_1 - by_1 + ck = 0
+    \end{cases}
+\end{equation}
+\end{mcmTheorem}
+
 % ==================================================
 % @brief    模型的评价与改进
 % ==================================================
 
 \mcmSection{模型的评价与改进}
+
+\mcmSubsection{}
