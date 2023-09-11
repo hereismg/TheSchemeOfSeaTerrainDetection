@@ -133,7 +133,7 @@
 
 \begin{equation}
     \begin{cases}
-        W = Proj AC = D \sin\frac{\theta}{2}\left[
+        W = D \sin\frac{\theta}{2}\left[
             \frac{1}{\cos(\frac{\theta}{2}+\gamma)} +
             \frac{1}{\cos(\frac{\theta}{2}-\gamma)}
         \right] \cos\gamma \\
@@ -142,9 +142,9 @@
     \end{cases}
 \end{equation}
 
-其中，$\theta$为多波束换能器的开角，$D(0)$为中心海域的深度，$S_w$为覆盖宽度
+其中，$\theta$为多波束换能器的开角，$D(0)$为中心海域的深度，$S_w$为覆盖宽度。
 
-当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D_5 = 70m$时，代入上述模型，计算可以得出结果（详见源码question1.py）.
+当$\theta = 120^\circ$，$\gamma=\alpha=1.5^\circ$，海域中心点处的海水深度$D(0)$时，代入上述模型，计算可以得出结果（详见源码question1.py）.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -259,8 +259,7 @@
 \begin{equation}
     \begin{cases}
         W =
-        Proj AC =
-        D\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma   \\
+        D(d)\sin\frac{\theta}{2}\left(\frac{1}{\cos(\frac{\theta}{2}+\gamma)} + \frac{1}{\cos(\frac{\theta}{2}-\gamma)}\right) \cdot \cos \gamma   \\
         D(d) = D(0) + d\tan\alpha \\
         \gamma = \arctan(|\sin\beta| \cdot \tan\alpha)
     \end{cases}
@@ -570,7 +569,7 @@ $A$点的坐标为:
     D_i =  (W_c - x) \tan{\alpha} + D_c
 \end{equation}
 
-联立式(34)、式(35)、式(36)，最终可解得$x_i$的值，即可确定下一条测线的最优方案。
+联立上述式子，最终可解得$x_i$的值，即可确定下一条测线的最优方案。
 
 循环执行第二步，并设立边界条件$ x \leq 2W_c $，即可求出一组测量长度最短、可完全覆盖整个待测海域的测线。
 

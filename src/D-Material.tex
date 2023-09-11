@@ -3,9 +3,24 @@
 % =======================================
 
 \bibliography{src/E-Reference}
+\begin{verbatim}
+[1] 测线[OB]. 百度百科. https://baike.baidu.com/item/%E6%B5%8B%E7%BA%BF0\
 
-% 引用所有 E-Reference.bib 里面的全部参考文献，不论在论文中是否被引用
-\nocite{*}
+2601563?fr=ge_ala.
+
+[2] 夏伟,刘雁春,边刚,等.基于海底地貌表示法确定主测深线间隔和测图比例尺[C]
+
+//第十五届海洋测绘综合性学术研讨会.0[2023-09-10].
+
+[3] 凸包[OB]. 百度百科. https://baike.baidu.com/item/%E5%87%B8%E5%8C%85
+
+?fromModule=lemma_search-box
+
+[4] 李伟,赖陪伟.影响多波束测量精度与质量的因素分析与措施[C]
+
+//中国航海学会航标专业委员会测学组学术研讨会.2008.
+
+\end{verbatim}
 
 
 \appendix
@@ -19,45 +34,145 @@
 
 \section{程序代码}
 
-\begin{lstlisting}[caption={类的定义语句}]
-    #include<iostream>
-    using namespace std;
+\begin{lstlisting}[caption={question1.py}]
+from base import *
 
-    int main(){
-        cout << "Hello, 数学建模" << endl;
-        return 0;
-    }
+distance = [-800, -600, -400, -200, 0, 200, 400, 600, 800]
+spacing = [distance[i] - distance[i - 1] for i in range(1, len(distance))]
+theta = (120 / 180) * math.pi
+alpha = (1.5 / 180) * math.pi
+DEPTH_CENTER = 70
+
+result_depth_list = [calculate_depth(i, alpha, DEPTH_CENTER) for i in distance]
+# 第一问中，gamma = alpha
+result_cover_width_list = [calculate_cover_width(theta, alpha, i) for i in result_depth_list]
+result_overlap_rate_list = \
+    [calculate_overlap_rate(spacing[i - 1], result_cover_width_list[i - 1] + result_cover_width_list[i])
+        for i in range(1, len(result_cover_width_list))
+        ]
+
+print("测线距中心点处的距离（米）：")
+print(distance)
+print("海水深度（米）：")
+print(result_depth_list)
+print("覆盖宽度（米）：")
+print(result_cover_width_list)
+print("与前一条测线的重叠率（%）：")
+print(result_overlap_rate_list)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={question2.py}]
+import math
+
+import numpy as np
+
+from base import *
+
+# 测量船距海域中心点处的距离（米）
+milage = [0 * 1852, 0.3 * 1852, 0.6 * 1852, 0.9 * 1852, 1.2 * 1852, 1.5 * 1852, 1.8 * 1852, 2.1 * 1852]
+# 测线方向夹角（角度制）
+beta = [0, 45, 90, 135, 180, 225, 270, 315]
+# 多波束换能器的开角（弧度制）
+theta = (120 / 180) * math.pi
+# 海底坡面坡度（弧度制）
+alpha = (1.5 / 180) * math.pi
+# 测坡角（弧度制）
+gamma = [math.atan(abs(math.sin(math.radians(i))) * math.tan(alpha)) for i in beta]
+# 海域中心点处的海水深度（米）
+DEPTH_CENTER = 120
+
+for i in range(0, len(beta)):
+    # 水深（米）
+    depth = [calculate_depth(- j * math.cos(math.radians(beta[i])), alpha, DEPTH_CENTER) for j in milage]
+    # 覆盖宽度计算结果（米）
+    result_cover_width_list = [calculate_cover_width(theta, gamma[i], depth[j]) for j in range(0, len(depth))]
+    print("测线方向夹角为 " + str(beta[i]) + "° 时，覆盖宽度（米）为：")
+    print(result_cover_width_list)
+    # 方差
+    # print(np.var(result_cover_width_list))
+    # 均值
+    # print(np.mean(result_cover_width_list))    
+\end{lstlisting}
+
+\begin{lstlisting}[caption={question3.py}]
+import math
+from sympy import symbols, Eq, solve
+
+from base import *
+
+
+def solution_question3(WIDTH, alpha, beta, theta, DEPTH_CENTER):
+    """
+    问题三的解题函数
+    :param WIDTH: 东西宽度（米）
+    :param alpha: 坡面坡度（弧度制）
+    :param beta: 测线方向夹角（弧度制）
+    :param theta: 多波束换能器的开角（弧度制）
+    :param DEPTH_CENTER: 海域中心点处的海水深度（米）
+    :return: 测线方案：以东到西为正方向，每条测线的东西方向坐标（米）
+    """
+    # 海域中心点处的东西方向坐标（米）
+    WIDTH_CENTER = WIDTH / 2
+    # 测坡角（弧度制）
+    gamma = math.atan(abs(math.sin(math.radians(beta))) * math.tan(alpha))
+    phi = (math.pi - theta) / 2 - math.atan(abs(math.sin(math.radians(beta))) * math.tan(alpha))
+    # 航线相对于左边界的距离（米）
+    x = 0
+    # 设测线方案解集为x_list，用于储存以东到西为正方向，每条测线的东西方向坐标（米）
+    x_list = []
+    # 初始化：计算第一条测线的位置，设为last_x。之后last_x表示为前一条测线的位置。
+    last_x = symbols("last_x")
+    equation = Eq((WIDTH_CENTER - last_x) * math.tan(alpha) + DEPTH_CENTER,
+                    math.sin(phi) * last_x / math.sin(theta / 2) / math.cos(alpha))
+    last_x = solve(equation, last_x)[0]
+    x_list.append(last_x)
+    # 初始化：计算出第一条测线的覆盖宽度，设为cover_width1。之后cover_width1表示为前一条测线的覆盖宽度。
+    depth = calculate_depth(last_x - WIDTH_CENTER, alpha, DEPTH_CENTER)
+    cover_width1 = calculate_cover_width(theta, gamma, depth)
+
+    # 开始计算每一条测线的位置，其中测线位置不得超过所划海域范围，即x不得大于WIDTH
+    while x <= WIDTH:
+        # 设 x 为未知数
+        x = symbols("x")
+        # 根据测线位置得在东西方向上测线距离海域中心点的距离（米），从而计算出测线位置的水深（米）。
+        depth = calculate_depth(x - WIDTH_CENTER, alpha, DEPTH_CENTER)
+        # 根据测线位置的水深（米）得到该条测线的覆盖宽度（米）
+        cover_width2 = calculate_cover_width(theta, gamma, depth)
+        # 为满足测量长度最短，且相邻条带之间的重叠率在10%~20%之间，相邻两条测线的重叠率需为10%
+        equation = Eq(1 - 2 * (x - last_x) / (cover_width1 + cover_width2), 0.1)
+        # 求解得到 x
+        x = solve(equation, x)[0]
+        # 再次判定，如果 x 在海域范围内，则放入解集中，反之不纳入
+        if x <= WIDTH:
+            x_list.append(x)
+        # 将当前规划的测线位置定为上一条测线的位置，准备规划下一条测线
+        last_x = x
+        # 将当前规划的测线的覆盖宽度定为上一条测线的覆盖宽度，准备规划下一条测线
+        cover_width1 = calculate_cover_width(theta, alpha, calculate_depth(x - WIDTH_CENTER, alpha, DEPTH_CENTER))
+    # 计算完成，返回解集
+    return x_list
+
+
+if __name__ == '__main__':
+    LENGTH = 2 * 1852
+    WIDTH = 4 * 1852
+    alpha = math.radians(1.5)
+    theta = math.radians(120)
+    beta = math.radians(90)
+    DEPTH_CENTER = 110
+
+    x_list = solution_question3(WIDTH, alpha, beta, theta, DEPTH_CENTER)
+    print("测线方案：以东到西为正方向，测线的坐标（米）如下：")
+    print(x_list)
+    print("相邻测线间的距离（米）：")
+    print([x_list[i] - x_list[i - 1] for i in range(1, len(x_list))])
+    print("整个测线方案的测量长度（米）：")
+    print(LENGTH * len(x_list))
 \end{lstlisting}
 
 \section{GeoGebra绘制链接}
 
 \begin{enumerate}
-    % \item \href{https://www.geogebra.org/m/fza22fcy}{\textcolor{blue}{问题一重述图}}
     \item \href{https://www.geogebra.org/m/hpkkarys}{\textcolor{blue}{问题一求解图}}
     \item \href{https://www.geogebra.org/m/f6kfjvru}{\textcolor{blue}{问题二求解图}}
-    % \item \href{https://www.geogebra.org/m/n8saurfn}{\textcolor{blue}{测坡角与测线方向角的函数图像}}
-    % \item \href{https://www.geogebra.org/m/xcvstdzg}{\textcolor{blue}{理想情况下的覆盖区域几何图}}
-    % \item \href{https://www.geogebra.org/m/absuxwpk}{\textcolor{blue}{一般情况下的覆盖区域几何图}}
-    % \item \href{https://www.geogebra.org/m/jzwhwcqr}{\textcolor{blue}{一般情况下通式计算几何图}}
 \end{enumerate}
-
-% \section{两张图片并排放置案例}
-
-% \begin{figure}[htbp]
-%     \centering
-%     \begin{subfigure}[b]{0.45\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{res/img/测坡面示意图.png}
-%       \caption{图像1}
-%       \label{fig:image1}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.45\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{res/img/测坡面示意图.png}
-%       \caption{图像2}
-%       \label{fig:image2}
-%     \end{subfigure}
-%     \caption{两张图片的子标题}
-%     \label{fig:two_images}
-%   \end{figure}
